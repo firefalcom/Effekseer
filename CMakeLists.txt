@@ -20,6 +20,7 @@ option(BUILD_TEST "Build test" OFF)
 option(BUILD_EXAMPLES "Build examples" ON)
 option(BUILD_UNITYPLUGIN "is built as unity plugin" OFF)
 option(BUILD_UNITYPLUGIN_FOR_IOS "is built as unity plugin for ios" OFF)
+option(BUILD_RENDERER "Build renderer library" OFF)
 option(FROM_CI "from ci" OFF)
 option(USE_LIBPNG_LOADER "use libpng in an internal loader (if it builds viewer except windows, it becomes on)" OFF)
 
@@ -131,7 +132,7 @@ if(BUILD_WITH_EASY_PROFILER)
         set(EASY_PROFILER_LIB_DEBUG "easy_profiler")
         set(EASY_PROFILER_LIB_RELEASE "easy_profiler")
     endif()
-    
+
     list(APPEND EFK_PROFILER_INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/ThirdParty/Install/easy_profiler/include)
     list(APPEND EFK_PROFILER_LIBRARY_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR}/ThirdParty/Install/easy_profiler/lib)
 
@@ -191,10 +192,10 @@ if(BUILD_VIEWER)
                         -DAMD64=off
                         -DCMAKE_POSITION_INDEPENDENT_CODE:BOOL=true
     )
-    
+
     list(APPEND EFK_THIRDPARTY_INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/ThirdParty/Install/zlib/include)
     list(APPEND EFK_THIRDPARTY_LIBRARY_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR}/ThirdParty/Install/zlib/lib)
-    
+
     if(MSVC)
         set(ZLIB_LIB_DEBUG "zlibstaticd")
         set(ZLIB_LIB_RELEASE "zlibstatic")
@@ -237,7 +238,7 @@ if(BUILD_VIEWER)
     )
     list(APPEND EFK_THIRDPARTY_INCLUDES ${CMAKE_CURRENT_BINARY_DIR}/ThirdParty/Install/libpng/include)
     list(APPEND EFK_THIRDPARTY_LIBRARY_DIRECTORIES ${CMAKE_CURRENT_BINARY_DIR}/ThirdParty/Install/libpng/lib)
-    
+
     if(MSVC)
         set(LIBPNG_LIB_DEBUG "libpng16_staticd")
         set(LIBPNG_LIB_RELEASE "libpng16_static")

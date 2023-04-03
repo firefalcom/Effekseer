@@ -114,7 +114,7 @@ if(BUILD_WITH_EASY_PROFILER)
     target_include_directories(Effekseer PUBLIC $<BUILD_INTERFACE:${EFK_PROFILER_INCLUDES}>)
     target_link_directories(Effekseer PUBLIC $<BUILD_INTERFACE:${EFK_PROFILER_LIBRARY_DIRECTORIES}>)
 
-    target_link_libraries(Effekseer PUBLIC 
+    target_link_libraries(Effekseer PUBLIC
         debug ${EASY_PROFILER_LIB_DEBUG}
         optimized ${EASY_PROFILER_LIB_RELEASE})
 
@@ -127,7 +127,7 @@ endif()
 
 WarnError(${PROJECT_NAME})
 
-if(BUILD_UNITYPLUGIN OR BUILD_UNITYPLUGIN_FOR_IOS)
+if(BUILD_UNITYPLUGIN OR BUILD_UNITYPLUGIN_FOR_IOS OR BUILD_RENDERER)
     install(DIRECTORY "${PROJECT_SOURCE_DIR}"
         DESTINATION "include"
         FILES_MATCHING

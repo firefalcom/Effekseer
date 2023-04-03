@@ -1,7 +1,7 @@
 project(EffekseerRendererCommon)
 cmake_minimum_required(VERSION 3.1)
 
-if(BUILD_UNITYPLUGIN OR BUILD_UNITYPLUGIN_FOR_IOS)
+if(BUILD_UNITYPLUGIN OR BUILD_UNITYPLUGIN_FOR_IOS OR BUILD_RENDERER)
 
 if(BUILD_UNITYPLUGIN)
     add_library(${PROJECT_NAME} INTERFACE)
@@ -26,7 +26,7 @@ set(PublicHeader
     EffekseerRenderer.Renderer_Impl.h
 )
 
-if(BUILD_UNITYPLUGIN_FOR_IOS)
+if(BUILD_UNITYPLUGIN_FOR_IOS OR BUILD_RENDERER)
     file(GLOB_RECURSE LOCAL_SOURCES *.cpp)
     add_library(${PROJECT_NAME} STATIC ${LOCAL_SOURCES})
     target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR}/../Effekseer ${EFK_THIRDPARTY_INCLUDES})
@@ -34,7 +34,7 @@ if(BUILD_UNITYPLUGIN_FOR_IOS)
 endif()
 
 set_target_properties(
-    ${PROJECT_NAME} PROPERTIES PUBLIC_HEADER 
+    ${PROJECT_NAME} PROPERTIES PUBLIC_HEADER
      "${PublicHeader}")
 
 install(
