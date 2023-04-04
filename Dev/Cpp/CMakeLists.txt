@@ -9,7 +9,7 @@ project(Effekseer C CXX)
 # C++ version
 if(APPLE)
     set(CMAKE_CXX_STANDARD 14)
-else()	
+else()
     set(CMAKE_CXX_STANDARD 17)
 endif()
 
@@ -72,7 +72,7 @@ endif()
 add_subdirectory(Effekseer)
 set_property(TARGET Effekseer PROPERTY FOLDER Libraries)
 
-if(BUILD_UNITYPLUGIN OR BUILD_UNITYPLUGIN_FOR_IOS)
+if(BUILD_UNITYPLUGIN OR BUILD_UNITYPLUGIN_FOR_IOS OR BUILD_RENDERER)
     add_subdirectory(EffekseerRendererCommon)
     set_property(TARGET EffekseerRendererCommon PROPERTY FOLDER Libraries)
 endif()
@@ -198,7 +198,7 @@ if(BUILD_VIEWER)
     else()
         add_dependencies(AltseedRHI ExternalProject_glew)
     endif()
-    
+
     target_include_directories(
         AltseedRHI
         PRIVATE
