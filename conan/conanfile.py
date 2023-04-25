@@ -45,5 +45,5 @@ class EffekseerConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = ["Effekseer", "EffekseerRendererCommon"]
+        self.cpp_info.libs = ["EffekseerRendererCommon", "Effekseer"]
         self.cpp_info.includedirs = ["include","include/Effekseer"]
