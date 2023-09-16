@@ -1,4 +1,9 @@
-from   conans       import ConanFile, CMake
+from conan import ConanFile
+from conan.tools.files import copy
+from os.path import join
+from conan.tools.cmake import CMake
+from conan.tools.scm import Git
+from conan.tools.files import load, update_conandata
 
 class EffekseerConan(ConanFile):
     name            = "effekseer"
@@ -7,7 +12,7 @@ class EffekseerConan(ConanFile):
     url             = "https://github.com/effekseer/Effekseer"
     license         = "MIT"
     settings        = "arch", "build_type", "compiler", "os"
-    generators      = "cmake"
+    generators      = "CMakeDeps", "CMakeToolchain"
     options         = {
             "shared": [True, False]
             }
@@ -15,17 +20,23 @@ class EffekseerConan(ConanFile):
             "shared": False
             }
 
-    scm ={
-        "type": "git",
-        "url": "auto",
-        "revision": "auto",
-        "submodule": "shallow"
-    }
+    def export(self):
+        git = Git(self, self.recipe_folder)
+        scm_url, scm_commit = git.get_url_and_commit()
+        update_conandata(self, {"sources": {"commit": scm_commit, "url": scm_url}})
+
+    def source(self):
+
+        sources = self.conan_data["sources"]
+
+        git = Git(self)
+        git.clone(url=sources["url"], target=".")
+        git.checkout(commit=sources["commit"])
+        self.run("git submodule update --init")
 
     def build(self):
-        cmake          = CMake(self)
+        cmake = CMake(self)
         options = {
-
             "BUILD_EXAMPLES" : False,
             "BUILD_GL" : False,
             "BUILD_DX9" : False,
@@ -40,8 +51,11 @@ class EffekseerConan(ConanFile):
             "USE_MSVC_RUNTIME_LIBRARY_DLL" : True
             }
 
-        cmake.configure(None, options)
+        cmake.configure(options)
         cmake.build()
+
+    def package(self):
+        cmake  = CMake(self)
         cmake.install()
 
     def package_info(self):
