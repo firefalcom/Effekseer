@@ -8,7 +8,7 @@ from conan.tools.files import load, update_conandata
 
 class EffekseerConan(ConanFile):
     name            = "effekseer"
-    version         = "170-1"
+    version         = "170-2"
     description     = "Conan package for Effekseer."
     url             = "https://github.com/effekseer/Effekseer"
     license         = "MIT"
