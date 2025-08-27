@@ -39,7 +39,7 @@ class EffekseerConan(ConanFile):
         self.run("git submodule update --init --recursive")
 
     def build(self):
-        cmake          = CMake(self)
+        cmake = CMake(self)
         options = {
             "BUILD_EXAMPLES" : False,
             "BUILD_GL" : False,
@@ -58,6 +58,9 @@ class EffekseerConan(ConanFile):
 
         cmake.configure(options)
         cmake.build()
+
+    def package(self):
+        cmake  = CMake(self)
         cmake.install()
 
     def package_info(self):
