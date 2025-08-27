@@ -20,7 +20,7 @@ class EffekseerConan(ConanFile):
             }
     default_options = {
             "shared": False,
-            "network_enabled" : True,
+            "network_enabled" : False,
             }
 
 
